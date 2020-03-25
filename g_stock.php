@@ -70,7 +70,12 @@ if (isset($_POST['submit'])) {
 
                 <div class="container-fluid">
             <div class="row">
-              <div class="col-md-6">
+            <div class="col-md-4">
+                <a href="seuil_min.php">
+                  <button type="button" class="btn btn-block btn-dark">les articles qui manquants</button>
+                </a>
+              </div>
+              <div class="col-md-4">
                 <a href="cat.php">
                   <button type="button" class="btn btn-block btn-primary">Ajouter un Article</button>
                 </a>
@@ -81,7 +86,7 @@ if (isset($_POST['submit'])) {
               $row=mysqli_fetch_assoc($r);
               $fact_id=$row['id'];*/
               ?>
-              <div class="col-md-6">
+              <div class="col-md-4">
                   <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#add_fact">Nouvelle facture</button>
                   <!-- Logout Modal-->
                             <div class="modal fade" id="add_fact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
