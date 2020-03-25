@@ -17,6 +17,13 @@ if (isset($_POST['submit'])) {
   $art_id=$_POST['art_id'];
   $qte=$_POST['qte'];
 
+  $q_qte="SELECT * FROM `glasses` where id='$art_id'";
+  $r_qte=mysqli_query($dbc,$q_qte);
+  $row_qte=mysqli_fetch_assoc($r_qte);
+  if($qte>$row_qte['qte']){
+    header('location:g_ventes1.php?f='.$fact_id.'&alert=0');
+  }
+
   $q0="SELECT * FROM `cart` WHERE `art_type`='1' and `art_id`='$art_id' and archived=0";
   //echo $q0;exit();
   $r0=mysqli_query($dbc,$q0);
@@ -90,6 +97,15 @@ if (isset($_POST['submit'])) {
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Vendre des lunettes</h1>
           <p class="mb-4">kach manektbou hna ...</p>
+          <?php
+                if (isset($_GET['alert'])) {
+                ?>
+                <div class="alert alert-success">
+                  <strong>Notification!</strong> La quantité n'est pas disponible
+                </div>
+                <?php
+                }
+                ?>
           <a href="g_ventes.php?f=<?= $fact_id ?>">
                   <button type="button" class="btn btn-block btn-primary">Gestion des ventes</button>
                 </a>
@@ -118,8 +134,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `glasses` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>glasses_<?= $row['id'] ?></td>
                       <td><?= $row['designation'] ?></td>
                       <td><?= $row['ref'] ?></td>

@@ -17,6 +17,13 @@ if (isset($_POST['submit'])) {
   $art_id=$_POST['art_id'];
   $qte=$_POST['qte'];
 
+  $q_qte="SELECT * FROM `glasses` where id='$art_id'";
+  $r_qte=mysqli_query($dbc,$q_qte);
+  $row_qte=mysqli_fetch_assoc($r_qte);
+  if($qte>$row_qte['qte']){
+    header('location:g_ventes2.php?f='.$fact_id.'&alert=0');
+  }
+
   $q0="SELECT * FROM `cart` WHERE `art_type`='2' and `art_id`='$art_id' and archived=0";
   $r0=mysqli_query($dbc,$q0);
   $num0=mysqli_num_rows($r0);
@@ -115,8 +122,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `glass` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>glass_<?= $row['id'] ?></td>
                       <td>SPH=<?= $row['sph'] ?> - CYL=<?= $row['cyl'] ?> - ADD=<?= $row['ad'] ?></td>
                       <td><?= $row['type_de_trait'] ?></td>

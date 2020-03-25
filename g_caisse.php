@@ -378,8 +378,8 @@ if (isset($_POST['submit1'])) {
                   <form class="user" action="g_caisse.php" method="post">
                     <div class="form-group row">
                       <div class="form-group col-md-4">
-                        <select class="form-control" name="m" required>
-                          <option>Mois</option>
+                        <select class="form-control" name="m">
+                          <option></option>
                           <option value="01">01</option>
                           <option value="02">02</option>
                           <option value="03">03</option>
@@ -395,8 +395,8 @@ if (isset($_POST['submit1'])) {
                         </select>
                       </div>
                       <div class="form-group col-md-4">
-                        <select class="form-control" name="y" required>
-                          <option>Année</option>
+                        <select class="form-control" name="y">
+                        <option></option>
                           <option value="2020">2020</option>
                           <option value="2021">2021</option>
                           <option value="2022">2022</option>
@@ -583,11 +583,177 @@ if (isset($_POST['submit1'])) {
                   </div>
                 </div>
                 <?php
+              }else if (!isset($m) and isset($y)) {
+                $sum1=0;
+                $sum_g1=0;
+                $q="SELECT * FROM `cart` WHERE `art_type`='1' and `date` like '$y%'";
+                $r=mysqli_query($dbc,$q);
+                while ($row=mysqli_fetch_assoc($r)) {
+                  $art_id=$row['art_id'];
+                  $qte=$row['qte'];
+
+                  $q1="SELECT * FROM `glasses` WHERE `id`='$art_id'";
+                  $r1=mysqli_query($dbc,$q1);
+                  $row1=mysqli_fetch_assoc($r1);
+
+                  $prix_v=$row1['prix_v'];
+                  $net_profit=$row1['net_profit'];
+
+                  $revenu=$prix_v*$qte;
+                  $revenu_net=$net_profit*$qte;
+
+                  $sum1=$sum1+$revenu;
+                  $sum_g1=$sum_g1+$revenu_net;
+                }
+                // 2
+                $q="SELECT * FROM `cart` WHERE `art_type`='2' and `date` like '$y%'";
+                $r=mysqli_query($dbc,$q);
+                while ($row=mysqli_fetch_assoc($r)) {
+                  $art_id=$row['art_id'];
+                  $qte=$row['qte'];
+
+                  $q1="SELECT * FROM `glass` WHERE `id`='$art_id'";
+                  $r1=mysqli_query($dbc,$q1);
+                  $row1=mysqli_fetch_assoc($r1);
+
+                  $prix_v=$row1['prix_v'];
+                  $net_profit=$row1['net_profit'];
+
+                  $revenu=$prix_v*$qte;
+                  $revenu_net=$net_profit*$qte;
+
+                  $sum1=$sum1+$revenu;
+                  $sum_g1=$sum_g1+$revenu_net;
+                }
+                // 3
+                $q="SELECT * FROM `cart` WHERE `art_type`='3' and `date` like '$y%'";
+                $r=mysqli_query($dbc,$q);
+                while ($row=mysqli_fetch_assoc($r)) {
+                  $art_id=$row['art_id'];
+                  $qte=$row['qte'];
+
+                  $q1="SELECT * FROM `lenses` WHERE `id`='$art_id'";
+                  $r1=mysqli_query($dbc,$q1);
+                  $row1=mysqli_fetch_assoc($r1);
+
+                  $prix_v=$row1['prix_v'];
+                  $net_profit=$row1['net_profit'];
+
+                  $revenu=$prix_v*$qte;
+                  $revenu_net=$net_profit*$qte;
+
+                  $sum1=$sum1+$revenu;
+                  $sum_g1=$sum_g1+$revenu_net;
+                }
+                // 4
+                $q="SELECT * FROM `cart` WHERE `art_type`='4' and `date` like '$y%'";
+                $r=mysqli_query($dbc,$q);
+                while ($row=mysqli_fetch_assoc($r)) {
+                  $art_id=$row['art_id'];
+                  $qte=$row['qte'];
+
+                  $q1="SELECT * FROM `implants` WHERE `id`='$art_id'";
+                  $r1=mysqli_query($dbc,$q1);
+                  $row1=mysqli_fetch_assoc($r1);
+
+                  $prix_v=$row1['prix_v'];
+                  $net_profit=$row1['net_profit'];
+
+                  $revenu=$prix_v*$qte;
+                  $revenu_net=$net_profit*$qte;
+
+                  $sum1=$sum1+$revenu;
+                  $sum_g1=$sum_g1+$revenu_net;
+                }
+                // 5
+                $q="SELECT * FROM `cart` WHERE `art_type`='5' and `date` like '$y%'";
+                $r=mysqli_query($dbc,$q);
+                while ($row=mysqli_fetch_assoc($r)) {
+                  $art_id=$row['art_id'];
+                  $qte=$row['qte'];
+
+                  $q1="SELECT * FROM `produit_entre` WHERE `id`='$art_id'";
+                  $r1=mysqli_query($dbc,$q1);
+                  $row1=mysqli_fetch_assoc($r1);
+
+                  $prix_v=$row1['prix_v'];
+                  $net_profit=$row1['net_profit'];
+
+                  $revenu=$prix_v*$qte;
+                  $revenu_net=$net_profit*$qte;
+
+                  $sum1=$sum1+$revenu;
+                  $sum_g1=$sum_g1+$revenu_net;
+                }
+                // 6
+                $q="SELECT * FROM `cart` WHERE `art_type`='6' and `date` like '$y%'";
+                $r=mysqli_query($dbc,$q);
+                while ($row=mysqli_fetch_assoc($r)) {
+                  $art_id=$row['art_id'];
+                  $qte=$row['qte'];
+
+                  $q1="SELECT * FROM `other` WHERE `id`='$art_id'";
+                  $r1=mysqli_query($dbc,$q1);
+                  $row1=mysqli_fetch_assoc($r1);
+
+                  $prix_v=$row1['prix_v'];
+                  $net_profit=$row1['net_profit'];
+
+                  $revenu=$prix_v*$qte;
+                  $revenu_net=$net_profit*$qte;
+
+                  $sum1=$sum1+$revenu;
+                  $sum_g1=$sum_g1+$revenu_net;
+                }
+                ?>
+
+               <div class="container">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card bg-dark text-white">
+                  <div class="card-body">
+                    <div class="container">
+                          <div class="row">
+                          <div class="col-md-6">
+                            <h3>Revenu</h3>
+                      <h4>Le : <?= $y ?></h4>
+                          </div>
+                          <div class="col-md-6">
+                            <br>
+                            <h2><?= $sum1 ?> DA</h2>
+                          </div>
+                          </div>
+                          </div>
+                </div>
+                </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="card bg-success text-white">
+                  <div class="card-body">
+                  <div class="container">
+                          <div class="row">
+                          <div class="col-md-6">
+                            <h3>Revenu net</h3>
+                      <h4>Le : <?= $y ?></h4>
+                          </div>
+                          <div class="col-md-6">
+                            <br>
+                            <h2><?= $sum_g1 ?> DA</h2>
+                          </div>
+                          </div>
+                          </div>
+                </div>
+                </div>
+                    </div>
+                  </div>
+                </div>
+                <?php
               }
                ?>
                 <br>
                 <?php
-                if (isset($sum1) and isset($sum_g1)) {
+                if (isset($sum1) and isset($sum_g1) and $sum1!=0) {
                 $capital=(($sum1-$sum_g1)*100)/$sum1;
                 $revenu_net=($sum_g1*100)/$sum1;
                  ?>
@@ -617,7 +783,18 @@ if (isset($_POST['submit1'])) {
     </script>
                 <div id="piechart"></div>
                 <br>
-                <a href="recette.php?d=<?= $y."-".$m ?>&s=<?= $sum1 ?>&g=<?= $sum_g1 ?>">
+                <?php
+                if(isset($m)){
+                  ?>
+                  <a href="recette.php?d=<?= $y."-".$m ?>&s=<?= $sum1 ?>&g=<?= $sum_g1 ?>">
+                  <?php
+                }else{
+                  ?>
+                  <a href="recette.php?d=<?= $y ?>&s=<?= $sum1 ?>&g=<?= $sum_g1 ?>">
+                  <?php
+                }
+                ?>
+                
                 <button type="button" class="btn btn-block" style="background-color: #e8c7d0; color: #5f1411">Imprimer la recette</button>
                 </a>
                 <?php 

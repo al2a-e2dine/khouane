@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Gestion de stoc</h1>
+          <h1 class="h3 mb-2 text-gray-800">Gestion de stock</h1>
           <p class="mb-4">kach manektbou hna ...</p>
                 
 
@@ -147,8 +147,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `glasses` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>glasses_<?= $row['id'] ?></td>
                       <td><?= $row['designation'] ?></td><td><?= $row['prix_v'] ?> DA</td>
                       <td><?= $row['qte'] ?></td>
@@ -193,8 +201,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `glass` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>glass_<?= $row['id'] ?></td>
                       <td>SPH=<?= $row['sph'] ?> - CYL=<?= $row['cyl'] ?> - ADD=<?= $row['ad'] ?></td><td><?= $row['prix_v'] ?> DA</td>
                       <td><?= $row['qte'] ?></td>
@@ -239,8 +255,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `lenses` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>lenses_<?= $row['id'] ?></td>
                       <td>SPH=<?= $row['sph'] ?> - CYL=<?= $row['cyl'] ?> - AXE=<?= $row['axe'] ?> - Rayon=<?= $row['rayon'] ?> - Diamètre=<?= $row['diametre'] ?> - K1=<?= $row['k1'] ?> - K2=<?= $row['k2'] ?> - Sclerale=<?= $row['sclerale'] ?></td><td><?= $row['prix_v'] ?> DA</td>
                       <td><?= $row['qte'] ?></td>
@@ -285,8 +309,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `implants` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>implants_<?= $row['id'] ?></td>
                       <td>Dioptrique=<?= $row['puissance'] ?></td><td><?= $row['prix_v'] ?> DA</td>
                       <td><?= $row['qte'] ?></td>
@@ -331,8 +363,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `produit_entre` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>produit_entre_<?= $row['id'] ?></td>
                       <td><?= $row['article'] ?></td><td><?= $row['prix_v'] ?> DA</td>
                       <td><?= $row['qte'] ?></td>
@@ -377,8 +417,16 @@ if (isset($_POST['submit'])) {
                     $q="SELECT * FROM `other` WHERE archived=0";
                     $r=mysqli_query($dbc,$q);
                     while ($row=mysqli_fetch_assoc($r)) {
+                      if($row['qte']<=$row['seuil_min']){
+                    ?>
+                    <tr style="background-color: #ffebd9">
+                    <?php
+                      }else{
                     ?>
                     <tr>
+                    <?php    
+                      }
+                    ?>
                       <td>other_<?= $row['id'] ?></td>
                       <td><?= $row['designation'] ?></td><td><?= $row['prix_v'] ?> DA</td>
                       <td><?= $row['qte'] ?></td>
